@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Runner!</title>
+	<link rel="stylesheet" href="style.css">
+	<script   src="https://code.jquery.com/jquery-2.2.3.js"   integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4="   crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="game">
+		<button id="startGame">
+			<p>Double Click here to start the game.</p>
+		</button>
+		
+		
+		<div id="ground"></div>
+
+	</div>	
+	<script>
+		$(document).ready(function(){
+
+			var possibleBlocks = ['.block1','.block2','.block3','.block4','.block5']
+			var currentBlock;
+			var bottomPosition = $('#game').height();
+			
+			$('#startGame').dblclick(function(){
+				$(this).hide();
+				createBlock();
+				//createBlock2();
+			});
+
+			function createBlock(){
+				var picked = Math.floor(5 * Math.random());
+				$('#game').append('<div class="block"></div>');
+				var blockSpeed = Math.floor(Math.random() * 101) + 50;
+					function blockFall(){
+					    var currentBlock = $('.block');
+						var blockHeight = $('.block').offset().top;
+						$('.block').animate({'top': '+='+ blockSpeed +'px'}, 500, 'linear');
+							if(blockHeight >= bottomPosition){
+								$('.block').remove();
+								createBlock();
+							};
+					};		
+					setInterval(blockFall, 100);
+			};
+
+			// function createBlock2(){
+			// 	$('#game').append('<div class="block2"></div>');
+			// 	var blockSpeed = Math.floor(Math.random() * 101) + 50;
+			// 		function blockFall2(){
+			// 		    var currentBlock = $('.block2');
+			// 			var blockHeight = $('.block2').offset().top;
+			// 			$('.block2').animate({'top': '+='+ blockSpeed +'px'}, 500, 'linear');
+			// 				if(blockHeight >= bottomPosition){
+			// 					$('.block2').remove();
+			// 					createBlock2();
+			// 				};
+			// 		};		
+			// 		setInterval(blockFall2, 100);
+			//};	
+
+		});
+		
+		
+		
+	</script>
+	
+</body>
+</html>
